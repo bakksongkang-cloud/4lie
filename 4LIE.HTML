@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4LIE | 쇼핑몰</title>
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Tailwind CSS base styles */
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        /* Custom styles for animations and shadows */
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .text-shadow-custom {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        /* Hide a section by default to be shown with JS */
+        .hidden-section {
+            display: none;
+        }
+    </style>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-gray-900">4LIE</a>
+            <nav class="hidden md:flex space-x-8 text-lg font-medium">
+                <a href="#" class="text-gray-600 hover:text-gray-900">홈</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">샵</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">커뮤니티</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">로그인</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <!-- Search Icon -->
+                <button class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+                <!-- Cart Icon -->
+                <button class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.182 1.701.705 1.701H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </button>
+                <!-- Hamburger Menu for Mobile -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">홈</a>
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">샵</a>
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">커뮤니티</a>
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">로그인</a>
+        </nav>
+    </header>
+
+    <!-- Main Content (Product Grid & Hero Section) -->
+    <main id="main-content" class="py-8">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-4 mb-12 relative overflow-hidden rounded-lg shadow-lg">
+            <!-- Note: You can replace this placeholder image with your own image URL -->
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1549412959-b14144371424?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="relative z-10 py-20 md:py-32 lg:py-48 text-center text-white">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-shadow-custom">새로운 스타일의 시작</h1>
+                <p class="text-xl md:text-2xl font-medium mb-6 text-shadow-custom">올 시즌 트렌드를 만나보세요</p>
+                <a href="#" class="inline-block bg-white text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-colors">자세히 보기</a>
+            </div>
+        </section>
+
+        <!-- Product Grid -->
+        <section class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">인기 상품</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Product Card 1 -->
+                <!-- Use 'onclick' to show the detailed product page -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer" onclick="showProductDetail('Hoodie')">
+                    <!-- Example of adding an image using a web URL. Replace with your own image URL. -->
+                    <img src="images/t-shirts.jpg" alt="스트라이프 카라티" class="w-full h-auto object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg">스트라이프 카라티</h3>
+                        <p class="text-gray-600">₩45,000</p>
+                        <!-- Note: The 'Add to Cart' button is moved to the detail page for this example. -->
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer" onclick="showProductDetail('Jeans')">
+                    <img src="images/jeans.jpg" alt="커브드 데님 팬츠" class="w-full h-auto object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg">커브드 데님 팬츠</h3>
+                        <p class="text-gray-600">₩58,000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Product Detail Section (Initially hidden) -->
+    <section id="product-detail" class="hidden-section container mx-auto px-4 py-8">
+        <button onclick="hideProductDetail()" class="flex items-center text-gray-600 hover:text-gray-900 mb-6 font-medium">
+            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            뒤로가기
+        </button>
+        <div class="bg-white rounded-lg shadow-lg p-6 lg:flex">
+            <!-- Product Image Section -->
+            <div class="w-full lg:w-1/2 flex-shrink-0 mb-6 lg:mb-0">
+                <!-- This image source will be updated by JavaScript -->
+                <img id="detail-image" src="" alt="상품 이미지" class="w-full h-auto object-cover rounded-lg">
+            </div>
+            <!-- Product Info Section -->
+            <div class="w-full lg:w-1/2 lg:pl-10">
+                <h1 id="detail-title" class="text-3xl font-bold text-gray-900 mb-2"></h1>
+                <p id="detail-price" class="text-2xl font-semibold text-gray-600 mb-4"></p>
+                <p id="detail-description" class="text-gray-700 mb-6">
+                    이 상품은 부드러운 소재로 제작되어 편안한 착용감을 제공합니다.
+                    어떤 스타일에도 잘 어울리는 기본 아이템입니다.
+                </p>
+                
+                <div class="mb-6">
+                    <h4 class="font-semibold mb-2">색상</h4>
+                    <div class="flex space-x-2">
+                        <button class="w-8 h-8 rounded-full border-2 border-transparent hover:border-gray-500 transition-colors" style="background-color: #2D3748;"></button>
+                        <button class="w-8 h-8 rounded-full border-2 border-gray-900 transition-colors" style="background-color: #E2E8F0;"></button>
+                        <button class="w-8 h-8 rounded-full border-2 border-transparent hover:border-gray-500 transition-colors" style="background-color: #A0AEC0;"></button>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="font-semibold mb-2">사이즈</h4>
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 rounded-md border border-gray-300 text-sm hover:bg-gray-100">S</button>
+                        <button class="px-4 py-2 rounded-md border border-gray-300 text-sm bg-gray-900 text-white">M</button>
+                        <button class="px-4 py-2 rounded-md border border-gray-300 text-sm hover:bg-gray-100">L</button>
+                        <button class="px-4 py-2 rounded-md border border-gray-300 text-sm hover:bg-gray-100">XL</button>
+                    </div>
+                </div>
+
+                <button id="add-to-cart-btn" class="w-full bg-gray-900 text-white font-bold py-3 rounded-md shadow-lg hover:bg-gray-700 transition-colors">장바구니에 담기</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- A message box for "Add to Cart" since alert() is not allowed -->
+    <div id="message-box" class="fixed bottom-4 right-4 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl hidden transition-all duration-300 transform translate-y-full">
+        <p id="message-text">상품이 장바구니에 담겼습니다!</p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 4LIE. 모든 권리 보유.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 제품 정보 데이터 (이미지 URL, 가격 등)
+        const products = {
+            'Hoodie': {
+                image: 'images/t-shirts.jpg',
+                title: '스트라이프 카라티',
+                price: '₩28,000'
+            },
+            'Jeans': {
+                image: 'images/jeans.jpg',
+                title: '커브드 데님 팬츠',
+                price: '₩58,000'
+            }
+        };
+
+        // 상품 상세 페이지를 보여주는 함수
+        function showProductDetail(productKey) {
+            const product = products[productKey];
+            const mainContent = document.getElementById('main-content');
+            const detailSection = document.getElementById('product-detail');
+            
+            // 상세 페이지 정보 업데이트
+            document.getElementById('detail-image').src = product.image;
+            document.getElementById('detail-image').alt = product.title;
+            document.getElementById('detail-title').textContent = product.title;
+            document.getElementById('detail-price').textContent = product.price;
+
+            // '장바구니에 담기' 버튼에 클릭 이벤트 리스너 추가 (이전에 추가된 리스너는 제거)
+            const addToCartBtn = document.getElementById('add-to-cart-btn');
+            const newAddToCartBtn = addToCartBtn.cloneNode(true);
+            newAddToCartBtn.addEventListener('click', () => {
+                addToCart(product.title);
+            });
+            addToCartBtn.parentNode.replaceChild(newAddToCartBtn, addToCartBtn);
+            
+            // 메인 페이지 숨기고 상세 페이지 보여주기
+            mainContent.classList.add('hidden-section');
+            detailSection.classList.remove('hidden-section');
+
+            // 페이지 상단으로 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 메인 페이지로 돌아가는 함수
+        function hideProductDetail() {
+            const mainContent = document.getElementById('main-content');
+            const detailSection = document.getElementById('product-detail');
+            
+            // 상세 페이지 숨기고 메인 페이지 보여주기
+            mainContent.classList.remove('hidden-section');
+            detailSection.classList.add('hidden-section');
+            
+            // 페이지 상단으로 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 장바구니에 담겼음을 알리는 메시지 박스
+        function addToCart(productName) {
+            const messageBox = document.getElementById('message-box');
+            const messageText = document.getElementById('message-text');
+            
+            messageText.textContent = `${productName} 상품이 장바구니에 담겼습니다!`;
+            
+            messageBox.classList.remove('hidden');
+            messageBox.classList.remove('translate-y-full');
+            
+            setTimeout(() => {
+                messageBox.classList.add('translate-y-full');
+                setTimeout(() => {
+                    messageBox.classList.add('hidden');
+                }, 300);
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
