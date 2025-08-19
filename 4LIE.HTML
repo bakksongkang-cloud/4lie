@@ -8,9 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Tailwind CSS base styles */
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+        
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f7fafc;
@@ -34,6 +37,8 @@
             display: none;
         }
     </style>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
@@ -102,7 +107,7 @@
 
                 <!-- Product Card 2 -->
                 <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer" onclick="showProductDetail('Jeans')">
-                    <img src="images/jeans.jpg" alt="스트라이프 카라티" class="w-full h-auto object-cover">
+                    <img src="images/jeans.jpg" alt="커브드 데님 팬츠" class="w-full h-auto object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-lg">커브드 데님 팬츠</h3>
                         <p class="text-gray-600">₩58,000</p>
@@ -185,7 +190,7 @@
                 price: '₩28,000'
             },
             'Jeans': {
-                image: 'images/t-shirts.jpg',
+                image: 'images/jeans.jpg',
                 title: '커브드 데님 팬츠',
                 price: '₩58,000'
             }
